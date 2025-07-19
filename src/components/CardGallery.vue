@@ -1,6 +1,6 @@
 <template>
   <section
-    class="flex flex-wrap justify-start gap-3 w-full max-w-7xl px-6 lg:px-12 mx-auto"
+    class="flex flex-wrap max-xl:justify-center justify-start gap-3 w-full max-w-7xl px-6 lg:px-12 mx-auto"
   >
     <div
       v-if="isLoading"
@@ -44,13 +44,16 @@
       <div class="flex flex-col gap-2 w-1/2">
         <h1 class="text-4xl font-bold">{{ pokemon.name }}</h1>
         <p class="text-neutral-500 text-sm">{{ pokemon.description }}</p>
-        <button class="py-2 px-4 font-bold bg-emerald-100 w-fit rounded-xl">
+        <button
+          @click="emit('selected-pokemon', pokemon)"
+          class="py-2 px-4 font-bold bg-emerald-100 w-fit rounded-xl"
+        >
           Know More
         </button>
       </div>
       <img
         :src="pokemon.sprites.other.showdown.front_default"
-        alt=""
+        :alt="'Pokeman' + pokemon.name + ' Image'"
         class="absolute bottom-2 end-2 w-32"
       />
     </div>
@@ -185,5 +188,7 @@ watch(
 
   { immediate: true }
 );
+
+const emit = defineEmits(["selected-pokemon"]);
 </script>
 <style></style>
